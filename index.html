@@ -651,8 +651,8 @@ body {
 
   .work-layout { display: block; }
   .work-nav { position: static; }
-  .work-detail { max-height: none; overflow: visible; padding-right: 0; }
-  .work-detail.mobile-hidden { display: none; }
+  .work-detail { max-height: none; overflow: visible; padding-right: 0; display: none; }
+  .work-detail.mobile-visible { display: block; }
   .work-mobile-back { display: none; font-family: var(--sans); font-size: 0.85rem; color: var(--jade); background: none; border: none; cursor: pointer; padding: 0 0 1rem; }
   .work-mobile-back.visible { display: block; }
   .work-nav.mobile-hidden { display: none; }
@@ -1079,8 +1079,9 @@ workNavItems.forEach(item => {
 
     if (isMobile()) {
       workNav.classList.add('mobile-hidden');
-      workDetail.classList.remove('mobile-hidden');
+      workDetail.classList.add('mobile-visible');
       mobileBack.classList.add('visible');
+      window.scrollTo(0, 0);
     }
   });
 });
@@ -1088,8 +1089,9 @@ workNavItems.forEach(item => {
 if (mobileBack) {
   mobileBack.addEventListener('click', () => {
     workNav.classList.remove('mobile-hidden');
-    workDetail.classList.add('mobile-hidden');
+    workDetail.classList.remove('mobile-visible');
     mobileBack.classList.remove('visible');
+    window.scrollTo(0, 0);
   });
 }
 

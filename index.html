@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aparna Menon · Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F9F8F6;
+  --panel-bg: #FAF0EC;
+  --card-bg: #FDFAF8;
+  --text: #1A1A1A;
+  --text-muted: #6B6B6B;
+  --rust: #C1694F;
+  --jade: #1F5F5B;
+  --border: #E0DDD8;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--panel-bg);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--rust);
+  border-bottom: none;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+}
+
+.nav-photo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.nav-name {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--bg);
+  white-space: nowrap;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-tab {
+  background: none;
+  border: none;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(249,248,246,0.7);
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.25s;
+  white-space: nowrap;
+}
+
+.nav-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0.85rem;
+  right: 0.85rem;
+  height: 2px;
+  background: var(--bg);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+.nav-tab:hover { color: var(--bg); }
+.nav-tab.active { color: var(--bg); font-weight: 600; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+.nav-resume {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--bg);
+  text-decoration: none;
+  padding: 0.5rem 0.85rem;
+  white-space: nowrap;
+  transition: opacity 0.25s;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+
+.nav-resume:hover { opacity: 1; }
+
+/* MAIN */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 2rem);
+}
+
+.panel {
+  display: none;
+  padding: 4rem 0 6rem;
+  background: var(--panel-bg);
+}
+
+.panel.active { display: block; }
+
+/* FADE IN */
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in:nth-child(2) { transition-delay: 0.1s; }
+.fade-in:nth-child(3) { transition-delay: 0.2s; }
+.fade-in:nth-child(4) { transition-delay: 0.3s; }
+.fade-in:nth-child(5) { transition-delay: 0.35s; }
+
+/* TYPOGRAPHY */
+.section-heading {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+  color: var(--jade);
+}
+
+.section-subheading {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+/* ABOUT */
+.about-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.about-photo-wrap {
+  flex-shrink: 0;
+}
+
+.about-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about-greeting {
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--jade);
+}
+
+.about-body {
+  max-width: 62ch;
+  flex: 1;
+}
+
+.about-body p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.about-body p:last-child { margin-bottom: 0; }
+
+/* WORK — TWO COLUMN */
+.work-layout {
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.work-nav {
+  position: sticky;
+  top: 72px;
+}
+
+.work-nav-item {
+  display: block;
+  width: 100%;
+  padding: 1rem 1rem 1rem 1.25rem;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--sans);
+}
+
+.work-nav-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.work-nav-item.active {
+  border-left-color: var(--rust);
+  background: var(--card-bg);
+}
+
+.work-nav-item:hover:not(.active) {
+  background: rgba(193,105,79,0.06);
+}
+
+.work-nav-num {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.work-nav-title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--jade);
+  margin-bottom: 0.35rem;
+}
+
+.work-nav-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--rust);
+  color: #fff;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  line-height: 1.4;
+}
+
+.work-detail {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.work-detail::-webkit-scrollbar { width: 3px; }
+.work-detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.cs-panel {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.cs-panel.active {
+  display: block;
+  opacity: 1;
+}
+
+.cs-context {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.cs-metric-preview {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--rust);
+  line-height: 1.35;
+  margin-bottom: 2rem;
+}
+
+.cs-content {
+  padding: 1.5rem 1.5rem 2.5rem;
+  background: var(--card-bg);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.cs-panel:nth-child(odd) .cs-content {
+  border-left: 3px solid var(--rust);
+}
+
+.cs-panel:nth-child(even) .cs-content {
+  border-left: 3px solid var(--jade);
+}
+
+.cs-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jade);
+  margin-bottom: 0.6rem;
+}
+
+.cs-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: var(--text);
+}
+
+.cs-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.cs-list li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  padding-left: 1rem;
+  position: relative;
+  margin-bottom: 0.65rem;
+}
+
+.cs-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--jade);
+}
+
+.cs-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.cs-metric-card {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--jade);
+  border-radius: 4px;
+}
+
+.cs-metric-card .cs-label {
+  margin-bottom: 0.4rem;
+}
+
+.cs-metric-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.cs-metric-why {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* MOBILE WORK */
+.work-mobile-back {
+  display: none;
+}
+
+.work-mobile-list .work-nav-item { display: block; }
+
+.exp-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--jade);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-marker {
+  position: absolute;
+  left: -1.5rem;
+  top: 6px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--jade);
+  border: 2px solid var(--jade);
+  z-index: 1;
+}
+
+.timeline-item.education .timeline-marker {
+  background: var(--bg);
+  border-color: var(--jade);
+}
+
+.timeline-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+}
+
+.timeline-role {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--jade);
+}
+
+.timeline-dates {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.timeline-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  line-height: 1.5;
+}
+
+.timeline-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.timeline-role-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* SKILLS */
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.skills-category .cs-label {
+  margin-bottom: 0.75rem;
+}
+
+.skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-pill {
+  font-size: 0.85rem;
+  color: var(--text);
+  border: 1px solid var(--rust);
+  background: transparent;
+  padding: 0.35em 0.85em;
+  border-radius: 100px;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+/* CONTACT */
+.contact-body {
+  max-width: 50ch;
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.contact-email {
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--rust);
+  padding-bottom: 2px;
+  transition: color 0.25s;
+}
+
+.contact-email:hover { color: var(--rust); }
+
+.contact-linkedin {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.contact-linkedin:hover { color: var(--rust); }
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text);
+  color: var(--text);
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.social-icon:hover {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .nav {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 0.75rem clamp(1rem, 4vw, 2rem);
+    gap: 0.5rem;
+  }
+
+  .nav-right {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+    padding-bottom: 0.25rem;
+  }
+
+  .nav-right::-webkit-scrollbar { display: none; }
+
+  .nav-tab { padding: 0.5rem 0.7rem; font-size: 0.82rem; }
+  .nav-resume { padding: 0.5rem 0.7rem; font-size: 0.78rem; }
+
+  .panel { padding: 2.5rem 0 4rem; }
+
+  .cs-header { padding: 1.25rem 0; }
+  .cs-title { font-size: 1.15rem; }
+
+  .cs-metrics-grid { grid-template-columns: 1fr; }
+
+  .work-layout { display: block; }
+  .work-nav { position: static; }
+  .work-detail { max-height: none; overflow: visible; padding-right: 0; }
+  .work-detail.mobile-hidden { display: none; }
+  .work-mobile-back { display: none; font-family: var(--sans); font-size: 0.85rem; color: var(--jade); background: none; border: none; cursor: pointer; padding: 0 0 1rem; }
+  .work-mobile-back.visible { display: block; }
+  .work-nav.mobile-hidden { display: none; }
+
+  .skills-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  .timeline-top { flex-direction: column; gap: 0.15rem; }
+
+  .about-layout { flex-direction: column; align-items: center; text-align: center; }
+  .exp-layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <span class="nav-name">Aparna Menon</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-tab active" data-tab="about">About Me</button>
+    <button class="nav-tab" data-tab="work">What I Work On</button>
+    <button class="nav-tab" data-tab="experience">Experience &amp; Skills</button>
+    <button class="nav-tab" data-tab="contact">Contact</button>
+    <a class="nav-resume" href="Aparna_Resume.pdf" target="_blank">Download Resume</a>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- ABOUT -->
+  <section class="panel active" id="about">
+    <div class="about-layout fade-in">
+    <div class="about-photo-wrap">
+      <img class="about-photo" src="photo.jpg" alt="Aparna Menon">
+    </div>
+    <div class="about-body">
+      <p><span class="about-greeting">Hi, I'm Aparna.</span></p>
+      <p class="fade-in">I'm a product manager with 5+ years across fintech, advertising, and financial services. At Zeta, a core banking infrastructure platform, I own cardholder experience across US and UK credit card programs, spanning onboarding, repayment, lifecycle notifications, and growth experiments.</p>
+      <p class="fade-in">Before fintech, I was a product manager on a contextual data platform at Media.net. Before that, a software engineer at Fidelity. I have an MBA from XLRI and a B.Tech from NIT Karnataka.</p>
+      <p class="fade-in">I am drawn to products where the infrastructure is complex but the user experience has to feel simple.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="panel" id="work">
+    <div class="work-layout fade-in">
+
+      <div class="work-nav">
+        <button class="work-nav-item active" data-cs="cs1">
+          <div class="work-nav-num">01</div>
+          <div class="work-nav-title">AI-Led Support Automation</div>
+          <span class="work-nav-tag">AI &amp; Automation</span>
+        </button>
+        <button class="work-nav-item" data-cs="cs2">
+          <div class="work-nav-num">02</div>
+          <div class="work-nav-title">Credit Limit Increase Program</div>
+          <span class="work-nav-tag">Growth &amp; Monetization</span>
+        </button>
+        <button class="work-nav-item" data-cs="cs3">
+          <div class="work-nav-num">03</div>
+          <div class="work-nav-title">Multi-Card App Launch</div>
+          <span class="work-nav-tag">Execution</span>
+        </button>
+        <button class="work-nav-item" data-cs="cs4">
+          <div class="work-nav-num">04</div>
+          <div class="work-nav-title">Onboarding Journey Design</div>
+          <span class="work-nav-tag">Product Design</span>
+        </button>
+        <button class="work-nav-item" data-cs="cs5">
+          <div class="work-nav-num">05</div>
+          <div class="work-nav-title">Contextual Ad Targeting</div>
+          <span class="work-nav-tag">Revenue Impact</span>
+        </button>
+      </div>
+
+      <button class="work-mobile-back">&larr; Back to projects</button>
+
+      <div class="work-detail">
+
+        <div class="cs-panel active" id="cs1">
+          <div class="cs-context">Sub-prime credit card, US market · Zeta</div>
+          <div class="cs-metric-preview">95% automated resolution on repayment calls. 33% reduction in support team costs.</div>
+          <div class="cs-content">
+            <div class="cs-label">Problem</div>
+            <p class="cs-text">Cardholders calling in were not getting fast answers. Wait times were long, and the queries were almost always the same: due dates, minimum payments, failed transactions. Users were stuck in a support queue for something that should have taken seconds. This was driving support costs upwards of $10k a month with no visibility into what customers actually needed.</p>
+            <div class="cs-label">Approach</div>
+            <ul class="cs-list">
+              <li>Built an LLM pipeline to process call transcripts and tag them by intent, to understand what users were actually calling about at scale</li>
+              <li>Repayment queries were the biggest pain point, accounting for nearly 42% of all calls</li>
+              <li>Designed an AI voice chatbot targeting repayment queries so users could get answers immediately without waiting for a human agent</li>
+              <li>Built in fallback logic to escalate to a human agent when needed, so users were never left without a resolution path</li>
+            </ul>
+            <div class="cs-label">Outcome</div>
+            <ul class="cs-list">
+              <li>95% automated resolution on repayment calls, meaning most users got their answer without a handoff</li>
+              <li>Resolution was tracked carefully. A call counted as resolved only if the query was actually answered, not just because the bot picked up</li>
+              <li>33% reduction in support team costs, with headcount reduced on queues where automation covered the need</li>
+            </ul>
+            <div class="cs-label">Metrics</div>
+            <div class="cs-metrics-grid">
+              <div class="cs-metric-card">
+                <div class="cs-label">North Star</div>
+                <div class="cs-metric-name">Automated resolution rate</div>
+                <div class="cs-metric-why">Measures whether users are actually getting their repayment queries resolved without a human, which is the core user outcome this project was built around.</div>
+              </div>
+              <div class="cs-metric-card">
+                <div class="cs-label">Guardrail</div>
+                <div class="cs-metric-name">Escalation rate to human agents</div>
+                <div class="cs-metric-why">Ensures automation gains do not come at the cost of users who genuinely needed a human being pushed through a frustrating bot experience first.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-panel" id="cs2">
+          <div class="cs-context">Near-prime credit card, UK market · Zeta</div>
+          <div class="cs-metric-preview">CLI targeting plan covering ~15% of MAU, designed to drive spend uplift at scale.</div>
+          <div class="cs-content">
+            <div class="cs-label">Problem</div>
+            <p class="cs-text">Cardholders on a near-prime credit card often have conservative limits that do not reflect their actual spending capacity. For users who have demonstrated responsible behaviour, a higher limit is genuinely useful. It gives them more flexibility and builds a stronger relationship with the product. The infrastructure to support CLIs existed but there was no systematic framework to identify the right users, at the right time, with the right offer.</p>
+            <div class="cs-label">Approach</div>
+            <ul class="cs-list">
+              <li>Worked with credit risk to define eligibility criteria for the first cohort, anchored in cardholder behaviour rather than blanket rules</li>
+              <li>Designed a phased rollout to learn from early cohorts before scaling</li>
+              <li>Built a configurable framework with engineering, allowing A/B tests on offer size and messaging without needing a new build each time</li>
+              <li>Ensured instrumentation was in place from the start so spend behaviour could be measured per cohort post-CLI</li>
+            </ul>
+            <div class="cs-label">Outcome</div>
+            <ul class="cs-list">
+              <li>Initial targeting plan covered roughly 15% of MAU</li>
+              <li>Framework built to support ongoing monetization experiments, making CLIs a repeatable growth mechanism rather than a one-time push</li>
+              <li>Cohort-level instrumentation in place to measure whether limit increases actually changed spending behaviour</li>
+            </ul>
+            <div class="cs-label">Metrics</div>
+            <div class="cs-metrics-grid">
+              <div class="cs-metric-card">
+                <div class="cs-label">North Star</div>
+                <div class="cs-metric-name">Spend uplift per cardholder post-CLI</div>
+                <div class="cs-metric-why">Measures whether the limit increase actually changed user behaviour, which is the real signal that the intervention was useful to the cardholder.</div>
+              </div>
+              <div class="cs-metric-card">
+                <div class="cs-label">Guardrail</div>
+                <div class="cs-metric-name">Delinquency rate</div>
+                <div class="cs-metric-why">Ensures eligibility criteria are identifying the right users and not driving defaults by extending credit to cardholders who cannot manage a higher limit.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-panel" id="cs3">
+          <div class="cs-context">US-based sub-prime credit card client · Zeta</div>
+          <div class="cs-metric-preview">App delivered to 10k+ users at launch, on time and on scope.</div>
+          <div class="cs-content">
+            <div class="cs-label">Problem</div>
+            <p class="cs-text">Sub-prime cardholders using multiple cards from the same issuer had no single place in the app to track balances, payments, and activity across both cards. Users had to manage their credit blind, which directly affected how confidently they could stay on top of their accounts. The client had a hard deadline and the work required coordinating across four teams simultaneously.</p>
+            <div class="cs-label">Approach</div>
+            <ul class="cs-list">
+              <li>Ran cross-functional coordination across product engineering, platform, design, and the client</li>
+              <li>Maintained the delivery roadmap and managed dependencies across all four teams</li>
+              <li>Was the single point of contact for the client on the product side</li>
+              <li>Worked closely with design to ensure repayment flows and balance visibility worked specifically for the sub-prime user persona, where clarity and trust matter more than aesthetics</li>
+            </ul>
+            <div class="cs-label">Outcome</div>
+            <ul class="cs-list">
+              <li>Delivered the multi-card app UI to 10k+ users at launch, on time and on scope</li>
+              <li>Clean delivery with no significant post-launch issues</li>
+              <li>Established a repeatable pattern for how future client app launches would be handled</li>
+            </ul>
+            <div class="cs-label">Metrics</div>
+            <div class="cs-metrics-grid">
+              <div class="cs-metric-card">
+                <div class="cs-label">North Star</div>
+                <div class="cs-metric-name">Activation rate</div>
+                <div class="cs-metric-why">Measures whether users who received the app actually set up and engaged with their cards, which is the real signal that the product solved the multi-card management problem for them.</div>
+              </div>
+              <div class="cs-metric-card">
+                <div class="cs-label">Guardrail</div>
+                <div class="cs-metric-name">Support contact rate post-launch</div>
+                <div class="cs-metric-why">Ensures the UX held up in the hands of real users and that confusion or errors did not drive users back to the support queue.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-panel" id="cs4">
+          <div class="cs-context">Near-prime credit card, UK market · Zeta</div>
+          <div class="cs-metric-preview">End-to-end onboarding designed across 5 third-party integrations, every failure state mapped and every fallback defined.</div>
+          <div class="cs-content">
+            <div class="cs-label">Problem</div>
+            <p class="cs-text">For a near-prime cardholder, applying for a credit card is already an anxious experience. When the onboarding flow broke or behaved inconsistently across integrations like KYC, identity verification, and bureau checks, users had no idea what went wrong or whether their application was still alive. That uncertainty drove drop-offs that had nothing to do with eligibility. The underlying complexity was real, but users should never have had to feel it.</p>
+            <div class="cs-label">Approach</div>
+            <ul class="cs-list">
+              <li>Mapped all integration touchpoints and failure states across all five integrations, with open banking being the most complex to design around</li>
+              <li>Worked with design to create a unified UX that masked backend complexity from the user</li>
+              <li>Designed for users who might drop off mid-flow and return later, ensuring the journey could resume gracefully without losing progress</li>
+              <li>Worked with engineering to define fallback logic for every touchpoint, accounting for edge cases that multiplied quickly across integrations</li>
+            </ul>
+            <div class="cs-label">Outcome</div>
+            <ul class="cs-list">
+              <li>Onboarding simplified the acquisition funnel and reduced friction across all pre-launch integrations</li>
+              <li>Every failure state has a defined user-facing response, so no user hits a dead end without knowing what to do next</li>
+              <li>Acquisition funnel conversion rate is the north star metric being tracked post-launch</li>
+            </ul>
+            <div class="cs-label">Metrics</div>
+            <div class="cs-metrics-grid">
+              <div class="cs-metric-card">
+                <div class="cs-label">North Star</div>
+                <div class="cs-metric-name">Acquisition funnel conversion rate</div>
+                <div class="cs-metric-why">Measures whether users who started onboarding actually completed it and got their card, which is the clearest signal that the experience was coherent and trustworthy enough to see through.</div>
+              </div>
+              <div class="cs-metric-card">
+                <div class="cs-label">Guardrail</div>
+                <div class="cs-metric-name">Drop-off rate per integration touchpoint</div>
+                <div class="cs-metric-why">Ensures that if conversion dips, we can pinpoint exactly which integration is failing users rather than treating the funnel as a black box.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-panel" id="cs5">
+          <div class="cs-context">Media.net Software Services</div>
+          <div class="cs-metric-preview">92% ad targeting accuracy for a $2.8B publisher. 40+ custom segments curated.</div>
+          <div class="cs-content">
+            <div class="cs-label">Problem</div>
+            <p class="cs-text">For advertisers, contextual targeting is only as good as the segments it runs on. When a high-value publisher was onboarded onto the platform, the existing segment library was not granular enough to match the right ads to their content. Advertisers were not reaching the right readers, clicks were not happening, and the CPMs reflected that. The revenue case for the deal was at risk.</p>
+            <div class="cs-label">Approach</div>
+            <ul class="cs-list">
+              <li>Worked with the data team to analyse vector clusters from the publisher's content run through the contextual engine. Vector clusters group semantically similar content together, making it possible to understand what the publisher's pages were actually about at scale</li>
+              <li>Used cluster outputs to identify three layers of segments: main segments covering core topics, brand segments tied to specific advertiser categories, and adjacent segments capturing related content to unlock additional demand</li>
+              <li>Defined which gaps in the existing library needed custom segments built and iterated on definitions based on live CTR data</li>
+            </ul>
+            <div class="cs-label">Outcome</div>
+            <ul class="cs-list">
+              <li>Achieved 92% ad targeting accuracy for the publisher</li>
+              <li>Strong CTR on matched inventory validated that the right ads were reaching the right readers</li>
+              <li>Became a proof point for onboarding future high-value publishers onto the platform</li>
+            </ul>
+            <div class="cs-label">Metrics</div>
+            <div class="cs-metrics-grid">
+              <div class="cs-metric-card">
+                <div class="cs-label">North Star</div>
+                <div class="cs-metric-name">CTR on matched inventory</div>
+                <div class="cs-metric-why">Measures whether the segments are actually connecting the right ads to the right content, proven by user behaviour rather than a relevance score.</div>
+              </div>
+              <div class="cs-metric-card">
+                <div class="cs-label">Guardrail</div>
+                <div class="cs-metric-name">Segment fill rate</div>
+                <div class="cs-metric-why">Ensures custom segments are broad enough to match to sufficient inventory at scale and not so narrow that they go unfilled.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & SKILLS -->
+  <section class="panel" id="experience">
+    <div class="exp-layout fade-in">
+      <div class="exp-left">
+        <h2 class="section-heading" style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:0.25rem;">Experience</h2>
+        <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0 1.5rem;">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-top">
+              <div class="timeline-role">Product Manager II, Zeta</div>
+              <div class="timeline-dates">Jan 2026 – Present</div>
+            </div>
+            <div class="timeline-desc">Customer Experience Lead, UK near-prime credit card</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-top">
+              <div class="timeline-role">Product Manager I, Zeta</div>
+              <div class="timeline-dates">Jun 2024 – Dec 2025</div>
+            </div>
+            <div class="timeline-desc">Charter Lead, US sub-prime credit card</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-top">
+              <div class="timeline-role">Product Manager, Media.net</div>
+              <div class="timeline-dates">May 2023 – May 2024</div>
+            </div>
+            <div class="timeline-desc">Contextual data platform</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-top">
+              <div class="timeline-role">Software Engineer, Fidelity Business Services</div>
+              <div class="timeline-dates">Aug 2019 – Jun 2021</div>
+            </div>
+          </div>
+
+          <div class="timeline-item education">
+            <div class="timeline-marker"></div>
+            <div class="timeline-top">
+              <div class="timeline-role">MBA, XLRI Xavier School of Management</div>
+              <div class="timeline-dates">Jun 2021 – Mar 2023</div>
+            </div>
+            <div class="timeline-desc">Business Management, Marketing &amp; Operations</div>
+          </div>
+
+          <div class="timeline-item education">
+            <div class="timeline-marker"></div>
+            <div class="timeline-top">
+              <div class="timeline-role">B.Tech, NIT Karnataka</div>
+              <div class="timeline-dates">Aug 2015 – Apr 2019</div>
+            </div>
+            <div class="timeline-desc">Information Technology</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-right">
+        <h2 class="section-heading" style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:0.25rem;">Skills &amp; Tools</h2>
+        <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0 1.5rem;">
+        <div class="skills-grid">
+          <div class="skills-category">
+            <div class="cs-label">Product</div>
+            <div class="skills-pills">
+              <span class="skill-pill">Stakeholder Management</span>
+              <span class="skill-pill">Roadmapping</span>
+              <span class="skill-pill">Competitive Analysis</span>
+              <span class="skill-pill">Pricing</span>
+              <span class="skill-pill">A/B Testing</span>
+              <span class="skill-pill">Wireframing</span>
+              <span class="skill-pill">User Data Analysis</span>
+              <span class="skill-pill">AI Prototyping</span>
+            </div>
+          </div>
+          <div class="skills-category">
+            <div class="cs-label">Tools</div>
+            <div class="skills-pills">
+              <span class="skill-pill">Claude Code</span>
+              <span class="skill-pill">Cursor</span>
+              <span class="skill-pill">Copilot</span>
+              <span class="skill-pill">Lovable</span>
+              <span class="skill-pill">Figma</span>
+              <span class="skill-pill">MoEngage</span>
+              <span class="skill-pill">MixPanel</span>
+              <span class="skill-pill">Metabase</span>
+              <span class="skill-pill">SendGrid</span>
+              <span class="skill-pill">Twilio</span>
+              <span class="skill-pill">Superset</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="panel" id="contact">
+    <h1 class="section-heading fade-in" style="font-size:clamp(2.5rem,5vw,3.5rem);">Want to chat?</h1>
+    <hr style="border:none;border-top:1px solid var(--border);margin:1.5rem 0 2.5rem;">
+    <p class="contact-body fade-in">Always open to conversations about payments, fintech, and consumer financial products. Email me at <a href="mailto:aparna.mnn97@gmail.com" style="color:var(--text);font-weight:600;text-decoration:none;border-bottom:1px solid var(--rust);">aparna.mnn97@gmail.com</a>.</p>
+    <p class="contact-body fade-in" style="margin-bottom:1.5rem;">We can also connect on LinkedIn.</p>
+    <div class="fade-in" style="display:flex;align-items:center;gap:1rem;">
+      <a href="https://www.linkedin.com/in/aparna-menon/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// Tab switching
+const tabs = document.querySelectorAll('.nav-tab');
+const panels = document.querySelectorAll('.panel');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    panels.forEach(p => {
+      p.classList.remove('active');
+      if (p.id === target) {
+        p.classList.add('active');
+        triggerFadeIns(p);
+      }
+    });
+  });
+});
+
+// Work panel switching
+const workNavItems = document.querySelectorAll('.work-nav-item');
+const csPanels = document.querySelectorAll('.cs-panel');
+const workNav = document.querySelector('.work-nav');
+const workDetail = document.querySelector('.work-detail');
+const mobileBack = document.querySelector('.work-mobile-back');
+const isMobile = () => window.innerWidth <= 700;
+
+workNavItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const target = item.dataset.cs;
+
+    workNavItems.forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+
+    csPanels.forEach(p => {
+      p.classList.remove('active');
+      p.style.opacity = '0';
+    });
+
+    const panel = document.getElementById(target);
+    panel.classList.add('active');
+    requestAnimationFrame(() => { panel.style.opacity = '1'; });
+
+    workDetail.scrollTop = 0;
+
+    if (isMobile()) {
+      workNav.classList.add('mobile-hidden');
+      workDetail.classList.remove('mobile-hidden');
+      mobileBack.classList.add('visible');
+    }
+  });
+});
+
+if (mobileBack) {
+  mobileBack.addEventListener('click', () => {
+    workNav.classList.remove('mobile-hidden');
+    workDetail.classList.add('mobile-hidden');
+    mobileBack.classList.remove('visible');
+  });
+}
+
+// Fade-in
+function triggerFadeIns(container) {
+  const items = container.querySelectorAll('.fade-in');
+  items.forEach((el, i) => {
+    el.classList.remove('visible');
+    void el.offsetWidth;
+    setTimeout(() => el.classList.add('visible'), 40 * i);
+  });
+}
+
+// Initial fade-in
+document.addEventListener('DOMContentLoaded', () => {
+  const active = document.querySelector('.panel.active');
+  if (active) triggerFadeIns(active);
+});
+</script>
+
+</body>
+</html>
